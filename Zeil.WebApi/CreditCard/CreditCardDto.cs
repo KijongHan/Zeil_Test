@@ -1,0 +1,1 @@
+public record CreditCardDto(long CardNumber);

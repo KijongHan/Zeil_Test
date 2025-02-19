@@ -1,9 +1,14 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+using Zeil.Domain.UseCases;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -15,30 +20,31 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseExceptionHandler(exceptionHandlerApp
+    => exceptionHandlerApp.Run(async context
+        => await Results.Problem()
+                     .ExecuteAsync(context)));
 
-var summaries = new[]
+app.MapGet("system/ping", () =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    return Results.Ok("pong");
+});
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("system/exception", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+    throw new InvalidOperationException("This is an exception test");
+});
+
+app.MapPost("/creditcard/validate", (CreditCardDto card) =>
+{
+    var creditCard = new CreditCard(card.CardNumber);
+    var validationResult = CreditCardUseCases.LuhnCheckIsValid(creditCard);
+
+    if (!validationResult.IsValid)
+    {
+        return Results.Problem($"{validationResult}", statusCode: StatusCodes.Status422UnprocessableEntity);
+    }
+    return Results.Ok(validationResult);
+});
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
