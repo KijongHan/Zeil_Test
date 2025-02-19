@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeil.WebApi", "Zeil.WebApi\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeil.Tests", "Zeil.Tests\Zeil.Tests.csproj", "{80B78DBD-4325-4182-A300-3820395A3E94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zeil.Domain.Tests", "Zeil.Domain.Tests\Zeil.Domain.Tests.csproj", "{B6F63EA8-1176-4E43-9E30-06F05C7A02F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{80B78DBD-4325-4182-A300-3820395A3E94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B78DBD-4325-4182-A300-3820395A3E94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B78DBD-4325-4182-A300-3820395A3E94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6F63EA8-1176-4E43-9E30-06F05C7A02F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F63EA8-1176-4E43-9E30-06F05C7A02F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F63EA8-1176-4E43-9E30-06F05C7A02F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F63EA8-1176-4E43-9E30-06F05C7A02F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
