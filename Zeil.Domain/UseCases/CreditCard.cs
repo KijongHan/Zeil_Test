@@ -2,11 +2,11 @@ namespace Zeil.Domain.UseCases;
 
 public static class CreditCardUseCases
 {
-    public static bool LuhnCheckIsValid(CreditCard creditCard)
+    public static CreditCardValidationResult LuhnCheckIsValid(CreditCard creditCard)
     {
         if (creditCard.CardNumbers.Length < 2)
         {
-            return false;
+            return new CreditCardValidationResult(false, -1, -1);
         }
 
         int sum = 0;
@@ -30,6 +30,6 @@ public static class CreditCardUseCases
 
         var calculatedChecksum = (10 - (sum % 10)) % 10;
         var actualChecksum = creditCard.CheckSum ?? 0;
-        return calculatedChecksum == actualChecksum;
+        return new CreditCardValidationResult(calculatedChecksum == actualChecksum, calculatedChecksum, actualChecksum);
     }
 }

@@ -9,3 +9,5 @@ public record CreditCard(int[] CardNumbers)
     {
     }
 }
+
+public record CreditCardValidationResult(bool IsValid, int CalculatedChecksum, int ActualChecksum);
