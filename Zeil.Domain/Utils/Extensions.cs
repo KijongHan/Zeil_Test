@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+namespace Zeil.Domain.Utils;
 
 public static class Extensions
 {
@@ -12,15 +12,5 @@ public static class Extensions
         }
         digits.Reverse();
         return digits;
-    }
-
-    public static int ToNumber(this List<int> digits)
-    {
-        int number = 0;
-        foreach (var digit in digits)
-        {
-            number = number * 10 + digit;
-        }
-        return number;
     }
 }
