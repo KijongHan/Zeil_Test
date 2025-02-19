@@ -6,7 +6,7 @@ public static class CreditCardUseCases
     {
         if (creditCard.CardNumbers.Length < 2)
         {
-            return new CreditCardValidationResult(false, -1, -1);
+            return new CreditCardValidationResult(false, -1, -1, "Credit card number must have at least 2 digits.");
         }
 
         int sum = 0;
@@ -30,6 +30,7 @@ public static class CreditCardUseCases
 
         var calculatedChecksum = (10 - (sum % 10)) % 10;
         var actualChecksum = creditCard.CheckSum ?? 0;
-        return new CreditCardValidationResult(calculatedChecksum == actualChecksum, calculatedChecksum, actualChecksum);
+        var valid = calculatedChecksum == actualChecksum;
+        return new CreditCardValidationResult(valid, calculatedChecksum, actualChecksum, valid ? "Credit card number is valid." : "Credit card number is invalid.");
     }
 }

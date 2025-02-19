@@ -10,4 +10,4 @@ public record CreditCard(int[] CardNumbers)
     }
 }
 
-public record CreditCardValidationResult(bool IsValid, int CalculatedChecksum, int ActualChecksum);
+public record CreditCardValidationResult(bool IsValid, int CalculatedChecksum, int ActualChecksum, string? Message);
