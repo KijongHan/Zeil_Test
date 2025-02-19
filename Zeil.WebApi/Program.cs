@@ -7,6 +7,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddLogging(loggingBuilder =>
+{
+    if (builder.Environment.IsDevelopment())
+    {
+        loggingBuilder.AddConsole();
+        loggingBuilder.AddDebug();
+    }
+});
 builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
 builder.Services.AddProblemDetails();
 
