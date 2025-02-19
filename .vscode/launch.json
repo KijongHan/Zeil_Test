@@ -1,0 +1,10 @@
+{
+  "configurations": [
+    {
+      "name": "Zeil.WebApi",
+      "type": "dotnet",
+      "request": "launch",
+      "projectPath": "${workspaceFolder}/Zeil.WebApi/Zeil.WebApi.csproj"
+    }
+  ]
+}
